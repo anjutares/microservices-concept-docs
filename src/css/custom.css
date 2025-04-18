@@ -1,0 +1,175 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #5C1FFF;
+  --ifm-color-primary-dark: #4b00ff;
+  --ifm-color-primary-darker: #4500f2;
+  --ifm-color-primary-darkest: #3a00c7;
+  --ifm-color-primary-light: #6d3bff;
+  --ifm-color-primary-lighter: #7847ff;
+  --ifm-color-primary-lightest: #9d7aff;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #9d7aff;
+  --ifm-color-primary-dark: #8252ff;
+  --ifm-color-primary-darker: #753eff;
+  --ifm-color-primary-darkest: #5001ff;
+  --ifm-color-primary-light: #b8a2ff;
+  --ifm-color-primary-lighter: #c5b6ff;
+  --ifm-color-primary-lightest: #f0ebff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+} 
+
+/* Mejoras para el dropdown de navegación */
+.navbar__items .dropdown {
+  position: relative;
+}
+
+.navbar__items .dropdown__menu {
+  max-height: none;
+  overflow: visible;
+  width: auto;
+  min-width: 12rem;
+}
+
+.navbar__items .dropdown__link {
+  white-space: nowrap;
+  padding: 0.75rem 1rem;
+}
+
+/* Asegura que los enlaces del dropdown tienen suficiente espacio y se ven bien */
+.navbar__items .dropdown__menu .dropdown__link {
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.navbar__items .dropdown__menu .dropdown__link:hover {
+  background-color: var(--ifm-color-emphasis-100);
+} 
+
+/* Estilos mejorados para el footer */
+.footer {
+  padding: 3rem 2rem;
+  background-color: #1d232f; /* Fondo ligeramente más oscuro para mayor contraste */
+}
+
+.footer__logo {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Mejora para el logo en el footer */
+.footer-logo-enhanced {
+  margin: 0 auto;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.footer-logo-enhanced:hover {
+  opacity: 1;
+}
+
+.footer__link-item {
+  font-size: 0.9rem;
+  line-height: 2;
+  transition: color 0.2s ease;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary-lighter);
+  text-decoration: none;
+}
+
+.footer__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.footer__item {
+  padding: 0;
+  line-height: 1.2;
+}
+
+.footer__copyright-content {
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.footer__copyright-content p {
+  margin: 0.3rem 0;
+  opacity: 0.8;
+}
+
+/* Estilo responsivo para móviles */
+@media (max-width: 996px) {
+  .footer__col {
+    margin-bottom: 2rem;
+  }
+  
+  .footer__copyright-content {
+    margin-top: 1rem;
+  }
+} 
+
+/* Corrección de enlaces activos en navbar */
+.navbar__link {
+  /* Resetear estilos de enlaces en la barra de navegación */
+  font-weight: normal;
+  color: var(--ifm-navbar-link-color);
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+/* Estilo específico para enlaces realmente activos */
+.navbar__link--active,
+.navbar__item.dropdown .navbar__link--active {
+  font-weight: 600; 
+  color: var(--ifm-color-primary);
+  border-bottom: 2px solid var(--ifm-color-primary);
+}
+
+/* Eliminar la clase active incorrecta de algunos enlaces */
+.navbar__link.navbar__link--active:not([aria-current="page"]) {
+  font-weight: normal;
+  color: var(--ifm-navbar-link-color);
+  border-bottom: 2px solid transparent;
+}
+
+/* Corrección para dropdown activo */
+.dropdown__link.dropdown__link--active {
+  background-color: rgba(92, 31, 255, 0.1);
+  font-weight: 600;
+} 
+
+/* Ajuste del tamaño del logo en la barra de navegación */
+.navbar__logo {
+  height: 2.5rem; /* Ajusta esto según sea necesario */
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+.navbar__logo img {
+  height: 100%;
+  width: auto;
+  max-width: 180px;
+}
+
+/* Destacar ligeramente el enlace de inicio */
+.navbar__items a[href='/'] {
+  font-weight: 500;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+} 

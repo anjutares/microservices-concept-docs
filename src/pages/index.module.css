@@ -1,0 +1,499 @@
+/**
+ * CSS styles for the homepage
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: #0a1929;
+  color: white;
+}
+
+/* Quantum animation overlay */
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 20% 35%, rgba(76, 181, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 75% 65%, rgba(68, 0, 255, 0.3) 0%, transparent 50%),
+    linear-gradient(to bottom, #0a1929, #071224);
+  animation: quantumPulse 8s infinite alternate ease-in-out;
+}
+
+/* Quantum particles */
+.heroBanner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  opacity: 0.8;
+  background-image: 
+    radial-gradient(circle at 85% 15%, rgba(0, 247, 255, 0.8) 0%, rgba(0, 247, 255, 0) 25px),
+    radial-gradient(circle at 15% 85%, rgba(128, 0, 255, 0.8) 0%, rgba(128, 0, 255, 0) 25px),
+    radial-gradient(circle at 75% 75%, rgba(0, 183, 255, 0.8) 0%, rgba(0, 183, 255, 0) 25px),
+    radial-gradient(circle at 25% 25%, rgba(255, 0, 200, 0.8) 0%, rgba(255, 0, 200, 0) 25px),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 50px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  animation: quantumParticles 12s infinite alternate ease-in-out;
+}
+
+/* Quantum grid */
+.quantumGrid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(111, 210, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(111, 210, 255, 0.1) 1px, transparent 1px);
+  background-size: 35px 35px;
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: center top;
+  animation: quantumGrid 6s infinite linear;
+}
+
+/* Floating particles */
+.quantumParticles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.quantumParticles span {
+  position: absolute;
+  display: block;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px rgba(111, 210, 255, 0.8);
+  animation: float 15s infinite linear;
+  filter: blur(0.5px);
+}
+
+.quantumParticles span::after {
+  content: '';
+  position: absolute;
+  top: -300%;
+  left: -300%;
+  width: 700%;
+  height: 700%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(111, 210, 255, 0.3) 30%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.quantumParticles span:nth-child(1) {
+  width: 5px;
+  height: 5px;
+  left: 20%;
+  top: 25%;
+  animation-delay: 0s;
+  animation-duration: 18s;
+  background: rgba(111, 210, 255, 0.9);
+}
+
+.quantumParticles span:nth-child(2) {
+  width: 4px;
+  height: 4px;
+  left: 80%;
+  top: 60%;
+  animation-delay: -2s;
+  animation-duration: 10s;
+  background: rgba(255, 149, 246, 0.9);
+}
+
+.quantumParticles span:nth-child(3) {
+  width: 6px;
+  height: 6px;
+  left: 40%;
+  top: 40%;
+  animation-delay: -5s;
+  animation-duration: 15s;
+  background: rgba(0, 255, 238, 0.9);
+}
+
+.quantumParticles span:nth-child(4) {
+  width: 3px;
+  height: 3px;
+  left: 65%;
+  top: 25%;
+  animation-delay: -9s;
+  animation-duration: 12s;
+  background: rgba(128, 0, 255, 0.9);
+}
+
+.quantumParticles span:nth-child(5) {
+  width: 5px;
+  height: 5px;
+  left: 30%;
+  top: 70%;
+  animation-delay: -7s;
+  animation-duration: 14s;
+  background: rgba(255, 115, 0, 0.9);
+}
+
+/* Quantum network effect */
+.quantumNetwork {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.quantumNetwork::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background-image: 
+    linear-gradient(45deg, rgba(111, 210, 255, 0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(111, 210, 255, 0.1) 25%, transparent 25%);
+  background-size: 60px 60px;
+  animation: networkMove 10s infinite linear;
+}
+
+.heroBanner > div {
+  position: relative;
+  z-index: 1;
+}
+
+/* Animation keyframes */
+@keyframes quantumPulse {
+  0% {
+    background-position: 0% 0%;
+    opacity: 0.6;
+  }
+  50% {
+    background-position: 100% 100%;
+    opacity: 0.8;
+  }
+  100% {
+    background-position: 0% 0%;
+    opacity: 0.6;
+  }
+}
+
+@keyframes quantumParticles {
+  0% {
+    background-position: 
+      85% 15%, 
+      15% 85%, 
+      75% 75%, 
+      25% 25%,
+      50% 50%;
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    background-position: 
+      90% 20%, 
+      10% 80%, 
+      70% 70%, 
+      30% 30%,
+      45% 55%;
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    background-position: 
+      80% 10%, 
+      20% 90%, 
+      80% 80%, 
+      20% 20%,
+      55% 45%;
+    opacity: 0.7;
+    transform: scale(1);
+  }
+}
+
+@keyframes quantumGrid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 35px 35px;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes networkMove {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.buttons a {
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.buttons a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+.buttons a:global(.button--primary) {
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.buttons a:global(.button--secondary) {
+  background: rgba(255, 255, 255, 0.9);
+  color: #0a1929;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Product Showcase Styles */
+.productShowcase {
+  padding: 5rem 0;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.productImage img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.productDescription {
+  padding: 1rem;
+}
+
+.productDescription h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--ifm-color-primary);
+}
+
+.productDescription p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.productDescription ul {
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.productDescription li {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Features Section */
+.features {
+  padding: 4rem 0;
+  background-color: var(--ifm-color-white);
+}
+
+.featuresTitle {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+}
+
+.featureCard {
+  background-color: var(--ifm-color-emphasis-0);
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.featureCard h3 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.featureCard p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.featureImageContainer {
+  height: 200px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.featureImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.featureCard:hover .featureImage {
+  transform: scale(1.05);
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 5rem 0;
+  text-align: center;
+  background-color: var(--ifm-color-primary);
+  color: white;
+}
+
+.ctaSection h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ctaSection p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Disclaimer Section */
+.disclaimerSection {
+  padding: 3rem 0;
+  text-align: center;
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-700);
+}
+
+.disclaimerSection h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.disclaimerSection p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.disclaimerSection a {
+  font-weight: bold;
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 996px) {
+  .productShowcase {
+    padding: 3rem 0;
+  }
+  
+  .productDescription h2 {
+    font-size: 2rem;
+  }
+  
+  .featuresTitle {
+    font-size: 2rem;
+  }
+  
+  .featureImageContainer {
+    height: 180px;
+  }
+  
+  .ctaSection h2 {
+    font-size: 2rem;
+  }
+  
+  .ctaSection p {
+    font-size: 1.1rem;
+  }
+} 

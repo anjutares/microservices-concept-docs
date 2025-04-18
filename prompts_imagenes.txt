@@ -1,0 +1,25 @@
+# Prompts para generar imágenes de CryoNova Labs
+
+## 1. Imagen hero banner (cryo-quantum.jpg)
+Crea una imagen futurista fotorrealista de un laboratorio criogénico de computación cuántica con tonos azules y purpuras. En primer plano, muestra un sistema de refrigeración criogénico con tubos y válvulas conectados a una cámara central donde hay un procesador cuántico brillante. El fondo debe tener luces tenues y vapores criogénicos que crean una atmósfera misteriosa. La composición debe ser amplia para usarse como banner, con una gradación de color que permita superponer texto blanco.
+
+## 2. Imagen del producto principal (quantum1.jpg)
+Genera una imagen fotorrealista en 3D del módulo Q-Control Nova: una unidad rectangular de 3U de altura para rack, con el exterior en metal negro mate y detalles en purpura. La unidad debe tener en su panel frontal puertos de fibra óptica, pantallas LED de estado pequeñas y el logotipo "Q-Control Nova" en letras blancas con detalles en purpura. Coloca la unidad en un entorno de laboratorio de alta tecnología con iluminación lateral que resalte sus contornos.
+
+## 3. Imagen de Telemetría y Sincronización (quantum2.jpg)
+Crea una ilustración futurista de fibras ópticas brillantes en tonos azules y purpuras transportando datos cuánticos. Muestra las fibras emergiendo de un punto central y extendiéndose en un patrón elegante, con pulsos de luz viajando a través de ellas. Incluye elementos visuales que sugieran transmisión de datos a alta velocidad (1.6 Tb/s), como destellos de luz y visualizaciones de datos. El fondo debe ser oscuro para que los elementos luminosos destaquen.
+
+## 4. Imagen de Criogenia Avanzada (quantum3.jpg)
+Crea una imagen fotorrealista que muestre el interior de un sistema criogénico para computación cuántica operando a 4 Kelvin. Visualiza un chip procesador cuántico en el centro, rodeado por un sistema de refrigeración con metales pulidos y tubos con líquido criogénico brillante en azul. Debe incluir elementos visuales que indiquen temperatura extremadamente baja, como vapor criogénico y componentes escarchados. Utiliza una paleta de colores fríos (azules, plateados) con acentos en purpura para los elementos electrónicos.
+
+## 5. Imagen de Corrección de Errores Cuánticos (quantum4.jpg)
+Genera una representación visual abstracta pero tecnológica de la corrección cuántica de errores. Muestra una matriz de qubits representados como esferas brillantes conectadas por líneas de energía. Incluye elementos visuales que sugieran la detección y corrección de errores: algunos qubits en rojo (con error) siendo corregidos y transformándose en azul/purpura (corregidos). Añade efectos visuales que representen el procesamiento ultrarrápido (menos de 1 µs), como líneas de datos y patrones de interferencia cuántica. Utiliza un fondo tecnológico oscuro con una rejilla o patrón sutil.
+
+## Instrucciones generales para todas las imágenes
+- Estilo: Fotorrealista con elementos futuristas
+- Resolución: Alta (preferiblemente 2000x1500 píxeles o superior)
+- Paleta de colores: Predominantemente purpuras (#5C1FFF, #3A00C7), azules, blancos y negros
+- Mood: Tecnológico, avanzado, preciso, científico
+- No incluir personas en las imágenes
+- Evitar texto dentro de las imágenes (excepto logos pequeños donde se especifique)
+- Las imágenes deben tener un aspecto profesional y de alta tecnología 

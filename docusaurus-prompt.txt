@@ -1,0 +1,454 @@
+Eres “Cursor‑Architect”, una IA experta en Docusaurus v3.Genera, desde cero, la documentación técnica de CryoNova Labs, un producto único basado en microservicios ligeros sin contenedores desplegados como servicios de sistema (systemd) sobre una única VM Linux.────────────────────────────────────────────────────────────────────────────🔧 REQUISITOS GENERALES
+
+Crea un sitio Docusaurus (TypeScript) con admonitions, Mermaid y plugin‑openapi.
+
+Estructura de carpetas dentro de /docs:/docs/├── producto‑general/           # Visión, stack y roadmap├── frontend/                  # Angular 19 SPA├── gateway‑yarp/              # API Gateway├── services/                  # Microservicios .NET 10│   ├── usersvc/│   ├── productsvc/│   ├── ordersvc/│   └── notificationsvc/├── messaging/                 # RabbitMQ + MassTransit├── infrastructure/            # Infraestructura & despliegue (systemd)└── shared‑concepts/           # Observabilidad, seguridad, etc.
+
+Genera sidebars.js con tres grandes agrupaciones:
+
+Producto general
+
+Módulos (Frontend, Gateway, Microservicios)
+
+Conceptos compartidos
+
+Añade a docusaurus.config.ts:• i18n (es default, en opcional)• Navbar: Inicio, Producto, un menú “Módulos”, API Reference• Footer: GitHub, Status Page, Roadmap────────────────────────────────────────────────────────────────────────────📄 CONTENIDO INICIAL (Markdown o MDX)
+
+
+
+introduccion.md – Caso de uso, foco a 6 meses
+
+stack‑tecnologico.md – (Pega el diagrama de bloques incluido más abajo)
+
+roadmap.md – Tabla de hitos mes 1‑6
+
+
+
+overview.md – Angular 19, Tailwind 4, PWA, i18n
+
+angular.md – CLI, estructura, SSR no requerido
+
+tailwind.md – Utilidades atómicas, guidelines de diseño
+
+pwa.md – Caching offline, push, instalación
+
+i18n.md – Flujo de traducción ES/EN
+
+
+
+overview.md – Rol del API Gateway, .NET 10
+
+routing.md – Ejemplos yarp.json
+
+security.md – JWT con OpenIddict, rate‑limit
+
+configuracion.md – Despliegue como servicio .NET (systemd)
+
+
+
+README.md – Propósito, diagrama C4 contexto‑contenedor
+
+api.md – Endpoints REST & gRPC (OpenAPI embed)
+
+eventos.md – Eventos Rabbit: UserRegistered, etc.
+
+db.md – Esquema PostgreSQL, migraciones EF Core
+
+
+
+rabbitmq.md – Instalación, UI, políticas ha‑mode
+
+masstransit.md – Retries, outbox, sagas
+
+eventos‑catalogo.md – Tabla OrderCreated, StockLow…
+
+
+
+systemd-services.md – Archivos de unidad, gestión de procesos, restart policies
+
+deployment.md – VM Ubuntu 22.04, scripts Bash, Nginx reverse proxy
+
+ci‑cd‑roadmap.md – Estrategia futura (GitHub Actions)
+
+
+
+observabilidad.md – Métricas, trazas, alertas
+
+seguridad.md – OWASP, dependencia de librerías
+
+dev‑workflow.md – Convenciones de ramas, commits, PR
+
+Extras:
+• Usa :::tip y :::warning para buenas prácticas / antipatrónes.
+• Incluye diagramas Mermaid para data‑flow y C4.
+• package.json con scripts: docs, start, build, deploy.
+• editUrl apunta a https://github.com/CryoNova‑Labs/mono‑repo/edit/main/.
+
+────────────────────────────────────────────────────────────────────────────
+
+💾 DIAGRAMA STACK (Mermaid)
+graph LR\
+  subgraph Frontend\
+    A[Angular 19 SPA\n(PWA + i18n)]\
+  end\
+  subgraph Gateway\
+    B[YARP API Gateway\n.NET 10]\
+  end\
+  subgraph BackEnd\
+    C1(UserSvc)\
+    C2(ProductSvc)\
+    C3(OrderSvc)\
+    C4(NotificationSvc)\
+  end\
+  subgraph Messaging\
+    D[RabbitMQ 3.13\nMassTransit 9]\
+  end\
+  subgraph DB\
+    E1(PostgreSQL 16\nUserSvc)\
+    E2(PostgreSQL 16\nProductSvc)\
+    E3(PostgreSQL 16\nOrderSvc)\
+  end\
+\
+  A -- HTTPS --> B\
+  B -- gRPC/HTTP --> C1 & C2 & C3 & C4\
+  C1 & C2 & C3 & C4 -- AMQP --> D\
+  C1 --> E1\
+  C2 --> E2\
+  C3 --> E3\
+```\
+
+
+Agrega también un gitignore, agrega este documento y lo que consideres
+
+────────────────────────────────────────────────────────────────────────────
+Detalles del producto
+────────────────────────────────────────────────────────────────────────────
+
+Q‑Control Nova
+
+Resumen Ejecutivo
+
+Q‑Control Nova es un módulo de 3 U que integra electrónica cryo‑CMOS, enlaces ópticos de silicio y aceleración in‑memory para el control y corrección de errores de hasta 256 qubits superconductores o de spin por unidad. Reduce el cableado en un 95 %, el consumo energético en un 80 % y la latencia de corrección a menos de 1 µs, habilitando la escalabilidad de los sistemas cuánticos a miles de qubits antes de 2030.
+
+1. Concepto General
+
+Los sistemas cuánticos actuales dependen de racks enteros de generadores de microondas, AWGs y amplificadores a temperatura ambiente que crecen linealmente con cada qubit. Q‑Control Nova traslada la generación de pulsos, la lectura homodina y el procesado de síndromes directamente al interior del criostato (4 K) mediante ASICs cryo‑CMOS de 22 nm. La telemetría y sincronización salen al exterior por fibras ópticas de silicio de 1,6 Tb/s, eliminando cientos de cables coaxiales.
+
+2. Tecnologías Clave
+
+2.1 ASICs Cryo‑CMOS Multi‑canal
+
+32 generadores IQ de 6–10 GHz y 14 bit por chip
+
+DAC/ADC integrados con fidelidad >99,9 %
+
+Transceptor backscatter a 40 Gb/s operativo de 300 K a 4 K
+
+2.2 Backplane Fotónico
+
+Láser de peine integrado y moduladores III‑V
+
+1,6 Tb/s por fibra con un único feed‑through óptico
+
+2.3 Acelerador QEC In‑memory
+
+Crossbars RRAM para multiplicaciones síndrome→corrección
+
+Retroalimentación <1 µs para bucles de corrección de errores
+
+3. Propuesta de Valor
+
+Problema Actual
+
+Solución Q‑Control Nova
+
+Impacto
+
+>1 000 cables por 100 qubits
+
+Fibras y buses criogénicos
+
+–95 % cableado
+
+30 racks de control por 1 000 qubits
+
+3 racks (12 U)
+
+CapEx –€8 M por sistema
+
+Latencia QEC ≈ 10 µs
+
+<1 µs in‑situ
+
+Fidelidad lógica ×10
+
+4. Mercado Objetivo
+
+Fabricantes de qubits superconductores y de spin (IBM, Google, IQM)
+
+Laboratorios académicos escalando de 5 a 50 qubits
+
+Integradores de máquinas fotónicas modulares (Xanadu Aurora)
+
+Se estima que el gasto en electrónica de control cuántico superará los 2 000 M USD en 2028.
+
+5. Modelo de Negocio
+
+Venta de Módulos: €120 k (55 % margen)
+
+Suscripción “Nova‑Sync”: SDK + firmware QEC (€1 050/mes por rack)
+
+Licencia IP Cryo‑CMOS: <€1/qubit para SoC de dopant‑spin
+
+ROI: 18 meses sustituyendo dos racks de instrumentación tradicional.
+
+6. Hoja de Ruta
+
+Fase
+
+Hito
+
+Fecha
+
+Alpha
+
+Prototipo 64 canales, validación 20 qubits
+
+Q1 2026
+
+Beta
+
+Cluster de 4 módulos, 200 qubits
+
+Q4 2026
+
+GA
+
+Certificación CE & FCC
+
+Q2 2027
+
+Gen 2
+
+Control 1 024 qubits + interfaz CXL óptica
+
+2028
+
+7. Identidad de Marca
+
+Empresa: CryoNova Labs
+
+Producto: Q‑Control Nova
+
+Lema: “Manda sobre el frío, escala lo imposible”
+
+Diseño: carcasa negro‑grafito con ventana de zafiro iluminada en violeta
+
+8. Riesgos y Mitigación
+
+Riesgo
+
+Mitigación
+
+Calor interno en el criostato
+
+ASICs 5 mW/canal + disipadores Cu‑OFHC anclados al stage de 4 K
+
+Obsolescencia del estándar óptico
+
+Transceptores reemplazables QSFP‑DD 1.6T
+
+Competencia de soluciones integradas
+
+Ventaja coste/W + backplane fotónico patentado
+
+9. Credibilidad Técnica
+
+Las tecnologías de base —cryo‑CMOS, interconexión fotónica de alta velocidad y QEC hardware— han sido demostradas por academia e industria. Q‑Control Nova las empaqueta en un formato plug‑and‑play que elimina el “spaghetti criogénico” y sienta las bases para sistemas cuánticos de más de un millón de qubits.
+
+
+© 2025 CryoNova Labs. Internal Use Only.
+
+
+
+Q‑Control Nova — Design Specification
+
+1. Industrial Design Overview
+
+Q‑Control Nova es un módulo 19” rackmount de 3 U (132,5 mm H × 100 mm W × 400 mm D) pensado para insertarse en cualquier chasis estándar y alojarse en la etapa de 4 K del criostato. El lenguaje formal combina rectas técnicas y chaflanes suaves para transmitir precisión sin agresividad.
+
+1.1 Identidad visual
+
+Color base: aluminio anodizado negro grafito (RAL 9005) con micro‑granulado cepillado.
+
+Acentos de marca: aro LED periférico en violeta 405 nm que respira lentamente en uso normal y parpadea ante eventos de qubit‑error.
+
+Logo: grabado láser de 25 µm de profundidad centrado en la manija.
+
+1.2 Interfaces frontales
+
+Elemento
+
+Cantidad
+
+Descripción
+
+Conector óptico QSFP‑DD 1.6T
+
+2
+
+Backplane fotónico a otros módulos
+
+Puerto CXL 2.0/PCIe 5 x16
+
+1
+
+Host link a 128 GB/s
+
+USB‑C debug (mode DP‑ALT)
+
+1
+
+Consola de servicio
+
+Botón capacitivo Standby/Cold‑Flush
+
+1
+
+Blanco → Violeta
+
+2. Mecánica y materiales
+
+Subconjunto
+
+Material
+
+Motivo
+
+Chasis
+
+Al 6061‑T6 CNC 3 mm
+
+Conductividad térmica + rigidez
+
+Disipador interno
+
+Cu‑OFHC + cámara de vapor
+
+Uniformidad a 4 K
+
+Guías laterales
+
+PA‑12 reforzado fibra 30 %
+
+Auto‑lubricante, -40 a 90 °C
+
+Manijas frontales
+
+Al 5052 + sobremoldeado TPE
+
+Aislamiento térmico al tacto
+
+El ensamblaje usa tornillería Torx T10 nitrurada para minimizar particulado metálico en la sala limpia.
+
+3. Gestión térmica y EMI
+
+Disipador en “S” que conduce los 25 W máx. de los ASIC cryo‑CMOS a la placa fría del criostato.
+
+Shield EMI multicapa Mu‑Metal + cobre estañado; atenuación >60 dB a 6–10 GHz.
+
+Tiristor PTC empotrado que abre circuito >7 K para auto‑protección.
+
+4. Interacción de usuario
+
+Feedback
+
+Medio
+
+Significado
+
+LED violeta fijo
+
+Normal operation
+
+LED ámbar
+
+Latencia QEC >1 µs
+
+Pulso rojo 2 Hz
+
+Sobre‑temperatura interna
+
+Halo blanco
+
+Modo firmware update
+
+La animación LED sigue un patrón “ease‑in‑out‑sine” de 4 s con luminancia pico 12 cd.
+
+5. Packaging y logística
+
+5.1 Embalaje individual (instalación)
+
+Bolsa ESD compostable anti‑estática; sellado térmico + indicador de humedad 8 %.
+
+Bandeja moldeada de pulpa (fibras de bagazo + almidón) con topología impresa en relieve para absorber 80 G verticales.
+
+Camiseta de cartón micro‑canal FSC con cierre imán + tira “zero tape”.
+
+Tarjeta Quick‑Start en papel semilla basilisco, tintas vegetales.
+
+5.2 Embalaje múltiple (shipping)
+
+Case reutilizable Pelican 1770 con espuma nitrílica cerrada, densidad 2 lb/ft³, corte CNC.
+
+Sensores ShockWatch 25G y TiltWatch 80 °.
+
+Bolsa desecante sílice 500 g y data‑logger Temp/RH Bluetooth.
+
+Precinto de seguridad VOID plateado con numeración láser.
+
+5.3 Ciclo de vida
+
+95 % de la masa del embalaje es reciclable o compostable.
+
+Programa Return & Reuse: el case retornable acumula hasta 100 ciclos certificables.
+
+6. Experiencia de unboxing
+
+Corte del sello VOID → tapa magnética revela gráfico violeta holográfico.
+
+Retirada de la bandeja de pulpa: módulo en bolsa ESD translúcida exhibe el halo LED.
+
+Bajo la bandeja: kit de fibras ópticas emparejadas y documentación AR (QR a manual 3D).
+
+Tiempo total <3 min sin herramientas, apto para salas ISO‑6.
+
+7. Guías de marca
+
+Tipografía: Inter Display, escalas 9 pt/14 pt y 32 pt/44 pt.
+
+Paleta: #0C0C0D (Graphite), #5C1FFF (Nova Violet), #FFFFFF.
+
+Clear‑space logo: ≥½ altura de la N.
+
+8. Transporte y manipulación
+
+Cumple ANSI/ESD S20.20 y IEC 61340‑5‑1.
+
+Clasificación de prueba de caída ISTA 3E (1 m, seis caras).
+
+Máx. 30 °C / 60 % RH en tránsito; sensores disparan alarma a 40 °C.
+
+9. Checklist de instalación
+
+Confirmar ROM >v1.2 en Host.
+
+Conectar fibras, CXL y firme abrazadera RF al 4 K‑stage.
+
+Pulsar botón Standby 3 s hasta LED blanco.
+
+Ejecutar nova‑diag --init.
+
+© 2025 CryoNova Labs. Internal Use Only.
+
+

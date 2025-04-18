@@ -1,0 +1,127 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CryoNova Labs API",
+    "description": "API para controlar y monitorizar sistemas Q-Control Nova",
+    "version": "1.0.0",
+    "contact": {
+      "name": "CryoNova Labs Support",
+      "url": "https://cryonova-labs.com/support",
+      "email": "support@cryonova-labs.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.cryonova-labs.com/v1",
+      "description": "Producción"
+    },
+    {
+      "url": "https://api-sandbox.cryonova-labs.com/v1",
+      "description": "Sandbox"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Operaciones relacionadas con usuarios"
+    },
+    {
+      "name": "Products",
+      "description": "Operaciones relacionadas con productos"
+    },
+    {
+      "name": "Orders",
+      "description": "Operaciones relacionadas con pedidos"
+    },
+    {
+      "name": "Notifications",
+      "description": "Operaciones relacionadas con notificaciones"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Obtener lista de usuarios",
+        "description": "Devuelve una lista paginada de usuarios",
+        "operationId": "getUsers",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Número de página",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Elementos por página",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "required": ["id", "email", "name"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Identificador único del usuario"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Correo electrónico del usuario"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nombre completo del usuario"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["admin", "operator", "viewer"],
+            "description": "Rol del usuario"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ]
+} 
